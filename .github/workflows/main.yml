@@ -12,11 +12,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    # Standard drop-in approach that should work for most people.
-    - uses: qianqianluo/test-docs@master
-      with:
-        docs-folder: "docs/"
-    # Example of using a custom build-command.
+     # Example of using a custom build-command.
     - uses: qianqianluo/test-docs@master
       with:
         build-command: "make html"
