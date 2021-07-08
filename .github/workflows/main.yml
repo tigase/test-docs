@@ -18,10 +18,7 @@ jobs:
           # Otherwise, you will failed to push refs to dest repo.
           fetch-depth: 0
           ref: refs/heads/${{ github.head_ref }}
-    - uses: qianqianluo/test-docs@master
-      with:
-        build-command: "make html"
-        docs-folder: "docs/"
+    
 
     # Create an artifact of the html output.
     - uses: actions/upload-artifact@v1
