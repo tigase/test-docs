@@ -28,12 +28,7 @@ python3 -m pip install --upgrade rinohtype pygments
 pwd
 ls -lah
 export SOURCE_DATE_EPOCH=$(git log -1 --pretty=%ct)
- 
-# make a new temp dir which will be our GitHub Pages docroot
-docroot=`mktemp -d`
 
-export REPO_NAME="${GITHUB_REPOSITORY##*/}"
- 
 ##############
 # BUILD DOCS #
 ##############
@@ -49,7 +44,12 @@ www.g
  
 git config --global user.name "${GITHUB_ACTOR}"
 git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+
  
+# make a new temp dir which will be our GitHub Pages docroot
+docroot=`mktemp -d`
+
+rsync -av "docs/build/html/" "${docroot}/"
 pushd "${docroot}"
  
 # don't bother maintaining history; just generate fresh
