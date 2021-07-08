@@ -30,6 +30,7 @@ jobs:
    
     # Publish built docs to gh-pages branch.
     # ===============================
+    - uses: actions/checkout@v2
     - name: Commit documentation changes
       run: |
         git clone https://github.com/qianqianluo/test-docs.git --branch gh-pages --single-branch gh-pages
