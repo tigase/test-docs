@@ -13,6 +13,11 @@ jobs:
     steps:
     - uses: actions/checkout@v1
      # Example of using a custom build-command.
+      with:
+          persist-credentials: false
+          # Otherwise, you will failed to push refs to dest repo.
+          fetch-depth: 0
+          ref: refs/heads/${{ github.head_ref }}
     - uses: qianqianluo/test-docs@master
       with:
         build-command: "make html"
