@@ -67,7 +67,7 @@ for current_version in ${versions}; do
       echo "INFO: Building for ${current_language}"
   
       # HTML #
-      sphinx-build -b html docs/ docs/build/html/${current_language}/${current_version} -D language="${current_language}"
+      sphinx-build -E -D language="${current_language}" -b html -d  build/doctress source build/html-${current_language}
  
   
       # copy the static assets produced by the above build into our docroot
