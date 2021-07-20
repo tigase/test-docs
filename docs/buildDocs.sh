@@ -91,7 +91,7 @@ git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 # make a new temp dir which will be our GitHub Pages docroot
 docroot=`mktemp -d`
 
-rsync -av "docs/build/html/" "${docroot}/"
+rsync -av "docs/build/html-${current_language}/" "${docroot}/"
 pushd "${docroot}"
  
 # don't bother maintaining history; just generate fresh
