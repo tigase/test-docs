@@ -1,0 +1,233 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh-CN" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh-CN" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Tigase 高级集群策略 (ACS)–版本 3.0.1 &mdash; TigaseDoc 0.1 文档</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/translations.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+    <link rel="prev" title="Tigase高级集群策略（ACS）–3.2.0版" href="tigase-acs.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> TigaseDoc
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">TIGASE-ACS</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="tigase-acs.html">Tigase高级集群策略（ACS）–3.2.0版</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tigase 高级集群策略 (ACS)–版本 3.0.1</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#design-and-implementation">1.设计和实施</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#acs">1.1.ACS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#design">1.2.设计</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tigase-acs-sm-installation">2.Tigase ACS SM安装</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">TigaseDoc</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Tigase 高级集群策略 (ACS)–版本 3.0.1</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/3.0.1.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="tigase-advanced-clustering-strategy-acs-version-3-0-1">
+<h1>Tigase 高级集群策略 (ACS)–版本 3.0.1<a class="headerlink" href="#tigase-advanced-clustering-strategy-acs-version-3-0-1" title="永久链接至标题">¶</a></h1>
+<section id="design-and-implementation">
+<h2>1.设计和实施<a class="headerlink" href="#design-and-implementation" title="永久链接至标题">¶</a></h2>
+<section id="acs">
+<h3>1.1.ACS<a class="headerlink" href="#acs" title="永久链接至标题">¶</a></h3>
+<p>ACS是我们通用的、商业化的集群策略，设计用于或多或少的典型的XMPP安装，包括多达5-7.5百万的在线用户和多达50个集群节点。我们对代码进行的负载测试包括一个有100百万个账户的用户数据库和一个高达150个的平均名册规模。</p>
+</section>
+<section id="design">
+<h3>1.2.设计<a class="headerlink" href="#design" title="永久链接至标题">¶</a></h3>
+<p>集群策略是基于集群节点之间共享有关在线用户的信息。谁是在线的，用户在哪里连接。集群节点之间的通信是以最高优先级处理的，以确保在线用户数据的最小延迟。一个有效的同步机制允许集群节点之间的流量最小，并分发关于连接和断开用户的准确数据。</p>
+</section>
+</section>
+<section id="tigase-acs-sm-installation">
+<h2>2.Tigase ACS SM安装<a class="headerlink" href="#tigase-acs-sm-installation" title="永久链接至标题">¶</a></h2>
+<p>Tigase ACS SM组件可以从tigase-acs发行包中获得。所有最终版本都可以在项目的文件部分找到。组件也包含在Tigase XMPP服务器的分发文件中（其中包括安装程序和&#64;-dist-max&#64;风味的存档）。</p>
+<p>下载存档后，只需提取并复制提取的存档/提取的存档目录的内容到提加塞服务器/安装目录中的库/目录，例如。在*nix系统下（假设存档已下载到主提加塞服务器目录）：</p>
+<div class="highlight-bash notranslate" id="bash"><div class="highlight"><pre><span></span>tar -xf tigase-acs-<span class="si">${</span><span class="nv">version</span><span class="si">}</span>.tar.gz
+cp -R tigase-acs-<span class="si">${</span><span class="nv">version</span><span class="si">}</span>/libs/ tigase-server/libs
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="tigase-acs.html" class="btn btn-neutral float-left" title="Tigase高级集群策略（ACS）–3.2.0版" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2021, Qian Luo
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
