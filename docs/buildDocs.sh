@@ -67,11 +67,11 @@ for current_version in ${versions}; do
       echo "INFO: Building for ${current_language}"
   
       # HTML #
-      sphinx-build -E -D language="${current_language}" -b html -d  build/doctress docs/source docs/build/html-${current_language}
+      sphinx-build -b html docs/source docs/build/html/${current_language}/${current_version} -D language="${current_language}"
  
   
       # copy the static assets produced by the above build into our docroot
-      rsync -av "docs/build/html-${current_language}/" "${docroot}/"
+      rsync -av "docs/build/html/" "${docroot}/"
   
    done
   
@@ -87,11 +87,6 @@ git checkout master
 git config --global user.name "${GITHUB_ACTOR}"
 git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
- 
-# make a new temp dir which will be our GitHub Pages docroot
-docroot=`mktemp -d`
-
-rsync -av "docs/build/html-${current_language}/" "${docroot}/"
 pushd "${docroot}"
  
 # don't bother maintaining history; just generate fresh
